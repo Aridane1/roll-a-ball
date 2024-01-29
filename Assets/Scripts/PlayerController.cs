@@ -12,8 +12,10 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
     public GameObject continueButtonObject;
+    public GameObject restartButtonObject;
     public GameObject exitButtonObject;
     public GameObject temporalTextObject;
+    public GameObject loseTextObject;
 
 
     private float powerJump;
@@ -38,6 +40,8 @@ public class PlayerController : MonoBehaviour
         winTextObject.SetActive(false);
         continueButtonObject.SetActive(false);
         exitButtonObject.SetActive(false);
+        restartButtonObject.SetActive(false);
+        loseTextObject.SetActive(false);
         temporalTextObject.SetActive(false);
 
     }
@@ -109,6 +113,14 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
+        }
+        if (collision.gameObject.CompareTag("Respawn"))
+        {
+            restartButtonObject.SetActive(true);
+            exitButtonObject.SetActive(true);
+            loseTextObject.SetActive(true);
+            rb.constraints = RigidbodyConstraints.FreezePosition;
+
         }
     }
 
